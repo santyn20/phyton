@@ -4,7 +4,6 @@ import tictactoe
 import PySimpleGUI as sg
 import json
 import time
-import os.path
 
 
 sg.theme('LightGrey2')
