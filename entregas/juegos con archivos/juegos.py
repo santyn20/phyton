@@ -16,7 +16,7 @@ layout = [  [sg.Text('Nombre de Jugador: '), sg.InputText()],
             sg.Button('Salir')] ]
 
 window = sg.Window('Juegos!', layout)
-infoJugador = []
+infoJugador = {}
 
 while True:
     event, values = window.read()
@@ -25,19 +25,25 @@ while True:
     if (values[0] == ''):
         sg.popup('Ingrese nombre')
     else:
+        archivo = open("Informacion.txt", "a")
         if event in('Hangman'):
-            infoJugador.append({'Nombre Jugador':values[0], 'Juego': 'Ahorcado'})
+            infoJugador['Nombre'] = values[0]
+            infoJugador['Juego'] = 'Hangman'
+            infoJugador['Fecha'] = time.strftime("%a, %d %b %Y %H:%M:%S", time.gmtime())
             window.close()
             hangman.main()
         if event in('Reverse'):
-            infoJugador.append({'Nombre Jugador':values[0], 'Juego': 'Reverse'})
+            infoJugador['Nombre'] = values[0]
+            infoJugador['Juego'] = 'Reverse'
+            infoJugador['Fecha'] = time.strftime("%a, %d %b %Y %H:%M:%S", time.gmtime())
             window.close()
             reversegam.main()
         if event in('TicTacToe'):
-            infoJugador.append({'Nombre Jugador':values[0], 'Juego': 'Tateti'})
+            infoJugador['Nombre'] = values[0]
+            infoJugador['Juego'] = 'TicTacToe'
+            infoJugador['Fecha'] = time.strftime("%a, %d %b %Y %H:%M:%S", time.gmtime())
             window.close()
             tictactoe.main()
-        archivo = open("Informacion.txt", "a")
         json.dump(infoJugador, archivo)
         archivo.close()
 window.close()
